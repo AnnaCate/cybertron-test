@@ -149,9 +149,11 @@ export default function() {
       client.gender === 'female' && client.address.state === 'Wyoming';
     const getFemaleFromWY = filter(filterFn);
 
-    const makeString = reduce((acc, client) => {
+    const reducerFn = (acc, client) => {
       return (acc += `${client.fullName}`);
-    }, '');
+    };
+    const makeString = reduce(reducerFn, '');
+
     return compose(
       makeString,
       getFemaleFromWY,
@@ -162,10 +164,9 @@ export default function() {
   const ex5 =
     'Use map and filter to return the full address of the clients living in North Carolina';
   const exercise5 = _ => {
-    const clientsInNC = filter(
-      client => client.address.state === 'North Carolina',
-      clients
-    );
+    const filterFn = client => client.address.state === 'North Carolina';
+    const clientsInNC = filter(filterFn, clients);
+
     const concatAddress = client => {
       return `${client.address.street} ${client.address.city}, ${client.address.state} ${client.address.zip}`;
     };
