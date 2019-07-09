@@ -11,7 +11,7 @@ import {
   prop,
   max,
 } from 'ramda';
-// import capitalizeWords from './lib/capitalize';
+import capitalizeWords from './lib/capitalize';
 
 const cars = [
   {
@@ -72,9 +72,7 @@ export default function() {
    * */
   const capitalizeModel = car => {
     const modelArray = split(' ');
-    const capitalized = map(
-      word => head(word).toUpperCase() + tail(word).toLowerCase()
-    );
+    const capitalized = map(capitalizeWords);
     const joined = join(' ');
     return compose(
       joined,
